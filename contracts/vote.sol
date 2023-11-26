@@ -43,22 +43,25 @@ contract Vote {
     }));
   }
 
-  function getProposals() public view returns (uint256) {
-    return proposals.length;
-  }
-  function getInfoProposals() public view returns (Proposal[] memory){
-    return proposals;
-  }
-  function getChairPerson() public view returns (address) {
-    return chairperson;
-  }
-
-  function vote(uint32 index) public onlyUsersNotVotedYet{
+ function vote(uint32 index) public onlyUsersNotVotedYet{
     Voter storage sender = voters[msg.sender];
     proposals[index].votesCount += 1;
     sender.voted=true;
     sender.vote=index;
   }
+//funcion que muestra a la persona de la silla o a cargo
+function getChairPerson() public view returns (address) {
+    return chairperson;
+  }
+  //funcion que muestra las propuestas
+  function getProposals() public view returns (uint256) {
+    return proposals.length;
+  }
+  //funcion que muestra la informacion de los participantes
+  function getInfoProposals() public view returns (Proposal[] memory){
+    return proposals;
+  }
+  //funcion que muestra los votos por Id
   function getVotesById(uint index) public view returns(uint256){
     return proposals[index].votesCount;
   }
